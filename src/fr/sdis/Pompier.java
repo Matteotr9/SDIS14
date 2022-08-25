@@ -1,17 +1,11 @@
 package fr.sdis;
 
-import javax.print.DocFlavor.INPUT_STREAM;
+import javax.management.RuntimeErrorException;
 
 public class Pompier {
 	String nom;
 	String prenom;
 	String tel;
-
-	public Pompier(String nom, String prenom, String tel) {
-		this.nom = nom;
-		this.prenom = prenom;
-		this.tel = tel;
-	}
 
 	public String getNom() {
 		return nom;
@@ -34,9 +28,13 @@ public class Pompier {
 
 	}
 
-	public void setTel(String tel) {
-		String[] tableautel;
-		tableautel=
+	public void setTel(String numero) {
+		tel = numero.replaceAll("\\D", "");
+		String numclear;
+		if (numero.length() < 10)
+			throw new RuntimeErrorException(null);
+		tel = numero;
+
 	}
 
 	public String getIdentite() {
@@ -45,25 +43,27 @@ public class Pompier {
 
 	public void setIdentite(String identite) {
 		String[] tableau;
-		if(identite.contains(" ")) {
-			
-		tableau=identite.split(" ",1);
-		nom=tableau[0];
-			//<---
-		prenom=tableau[1];
-		}else {
-			nom=identite;
-			prenom="";
-		
-	}
+		if (identite.contains(" ")) {
+
+			tableau = identite.split(" ", 2);
+			nom = tableau[1];
+			// <---
+			prenom = tableau[0];
+		} else {
+			nom = identite;
+			prenom = "";
+
+		}
 
 	public Character getStatut(unePeriode periode) {
-
+	return unePeriode.getStatut(this);
 	}
 
 	public String toString() {
-		return identite
+		return getIdentite();
 	}
 
-}
+		// Test unitaire JUnit
+
+	}
 }
