@@ -27,7 +27,7 @@ class PeriodeTest {
 
 		periode.affecter(new Pompier("BERNARD Dupont"), 'x');
 		assertEquals(periode.getStatut(new Pompier("BERNARD Dupont")), 'x');
-		System.out.println("Ajouter ce pompier ?");
+		System.out.println("Ajouter ce pompier ?");é
 	}
 
 	@Test
