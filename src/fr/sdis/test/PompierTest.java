@@ -1,11 +1,13 @@
 package fr.sdis.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.sdis.InvalidTelNumnerExecption;
 import fr.sdis.Pompier;
 
 class PompierTest {
@@ -13,7 +15,7 @@ class PompierTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		pompier = new Pompier();
+		pompier = new Pompier("");
 	}
 
 	@Test
@@ -42,14 +44,24 @@ class PompierTest {
 	}
 
 	@Test
-	void testGetTel() {
+	void testGetTel() throws InvalidTelNumnerExecption {
 		pompier.setTel("0123456789");
 		assertEquals("0123456789", pompier.getTel());
 	}
 
 	@Test
-	void testSetTel() {
-		fail("Not yet implemented");
+	void testSetTel() throws InvalidTelNumnerExecption {
+		InvalidTelNumnerExecption thrown = assertThrows(InvalidTelNumnerExecption.class, () -> {
+			pompier.setTel("0606060606");
+		});
+		assertEquals("Invalid phone number", thrown.getMessage());
+		InvalidTelNumnerExecption thrown2 = assertThrows(InvalidTelNumnerExecption.class, () -> {
+			pompier.setTel("1");
+		});
+		assertEquals("Invalid phone Number", thrown2.getMessage());
+
+		pompier.setTel(" 06.3.... 25 417 89");
+		assertEquals("invalid number phone", null);
 	}
 
 	@Test

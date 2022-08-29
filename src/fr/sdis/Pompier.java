@@ -1,11 +1,13 @@
 package fr.sdis;
 
-import javax.management.RuntimeErrorException;
-
 public class Pompier {
 	String nom;
 	String prenom;
 	String tel;
+
+	public Pompier(String identite) {
+
+	}
 
 	public String getNom() {
 		return nom;
@@ -28,12 +30,11 @@ public class Pompier {
 
 	}
 
-	public void setTel(String numero) {
-		tel = numero.replaceAll("\\D", "");
-		String numclear;
-		if (numero.length() < 10)
-			throw new RuntimeErrorException(null);
-		tel = numero;
+	public void setTel(String numero) throws InvalidTelNumnerExecption {
+		String numclear = numero.replaceAll("\\D", "");
+		if (numclear.length() < 10)
+			throw new InvalidTelNumnerExecption("Invalid phone number");
+		tel = numclear;
 
 	}
 
@@ -54,16 +55,28 @@ public class Pompier {
 			prenom = "";
 
 		}
+	}
 
-	public Character getStatut(unePeriode periode) {
-	return unePeriode.getStatut(this);
+	public char getStatut(Periode periode) {
+		return periode.getStatut(this);
 	}
 
 	public String toString() {
 		return getIdentite();
 	}
 
-		// Test unitaire JUnit
-
+	@Override
+	public boolean equals(Object obj) {
+		if(obj==null) {
+			return false ;
+			
+		}
+		if(!(obj instanceof Pompier)) {
+			return false ;
+		
 	}
+		return ((Pompier)obj).getIdentite().equals(getIdentite());
+
+	// Test unitaire JUnit
+
 }
