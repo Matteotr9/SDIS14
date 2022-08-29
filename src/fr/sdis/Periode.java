@@ -35,8 +35,11 @@ public class Periode {
 		if (enMission.contains(unPompier)) {
 			return 'm';
 		}
+		if (enMission.contains(unPompier)) {
+			return 'd';
+		}
 
-		return 'd';
+		return 'x';
 	}
 
 	public void missionner(Pompier unPompier) {

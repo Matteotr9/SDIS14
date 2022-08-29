@@ -65,17 +65,19 @@ public class Pompier {
 		return getIdentite();
 	}
 
+	// equals utiliser comme sa
 	@Override
 	public boolean equals(Object obj) {
-		if(obj==null) {
-			return false ;
-			
+		if (obj == null) {
+			return false;
+
 		}
-		if(!(obj instanceof Pompier)) {
-			return false ;
-		
+		if (!(obj instanceof Pompier)) {
+			return false;
+
+		}
+		return ((Pompier) obj).getIdentite().equals(getIdentite());
 	}
-		return ((Pompier)obj).getIdentite().equals(getIdentite());
 
 	// Test unitaire JUnit
 
